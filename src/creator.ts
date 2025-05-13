@@ -47,6 +47,7 @@ export interface MSICreatorOptions {
   toastActivatorClsid?: string;
   description: string;
   exe: string;
+  msi: string;
   icon?: string;
   extensions?: Array<string>;
   lightSwitches?: Array<string>;
@@ -185,6 +186,7 @@ export class MSICreator {
     this.exeFilename = this.exe + ".exe";
     this.exeFilePath =
       this.appDirectory.replace(/[/\\]$/, "") + path.sep + this.exeFilename;
+    this.msi = options.msi || this.exe;
     this.icon = options.icon;
     this.extensions = options.extensions || [];
     this.lightSwitches = options.lightSwitches || [];
@@ -328,7 +330,7 @@ export class MSICreator {
    * @returns {Promise<{ wxsFile: string, wxsContent: string }>}
    */
   private async createWxs(): Promise<{ wxsFile: string; wxsContent: string }> {
-    const target = path.join(this.outputDirectory, `${this.exe}.wxs`);
+    const target = path.join(this.outputDirectory, `${this.msi}.wxs`);
     const base = path.basename(this.appDirectory);
     const directories = await this.getDirectoryForTree(
       this.tree!,
