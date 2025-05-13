@@ -138,6 +138,7 @@ export class MSICreator {
   public toastActivatorClsid?: string;
   public description: string;
   public exe: string;
+  public msi: string;
   public icon?: string;
   public extensions: Array<string>;
   public lightSwitches: Array<string>;
